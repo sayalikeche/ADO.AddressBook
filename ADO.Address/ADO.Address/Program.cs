@@ -39,6 +39,11 @@ namespace ADO.Address
                         }
                         break;
                     case 2:
+                        Console.WriteLine("Enter id to Delete Data");
+                        int num = Convert.ToInt32(Console.ReadLine());
+                        Address.DeletePersonDetails(num);
+                        break;
+                    case 3:
                         flag = false;
                         break;
                 }

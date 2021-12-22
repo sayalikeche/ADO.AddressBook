@@ -6,18 +6,18 @@ using System.Text;
 
 namespace ADO.Address
 {
-   
-     public class Operation
+
+    public class Operation
     {
         private SqlConnection con;
-        //To Handle connection related activities    
+        
         private void Connection()
         {
             string constr = "Server=(localdb)\\MSSQLLocalDB;Database=AddressBookServiceDB;Trusted_Connection=true";
             con = new SqlConnection(constr);
 
         }
-        //To Add details    
+         
         public Model AddData(Model data)
         {
             try
@@ -34,12 +34,40 @@ namespace ADO.Address
                 com.Parameters.AddWithValue("@zip", data.Zip);
                 com.Parameters.AddWithValue("@phonenumber", data.Phone_Number);
                 com.Parameters.AddWithValue("@email", data.Email);
-                
                 com.Parameters.AddWithValue("@Contact_id", data.Contact);
                 con.Open();
                 int i = com.ExecuteNonQuery();
                 con.Close();
                 return data;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        //To Delete Person details    
+        public int DeletePersonDetails(int id)
+        {
+            try
+            {
+                Connection();
+                SqlCommand com = new SqlCommand("DeleteAddressBook", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("@id", id);
+                con.Open();
+                int i = com.ExecuteNonQuery();
+                con.Close();
+                if (i >= 1)
+                {
+
+                    return id;
+
+                }
+                else
+                {
+
+                    return 0;
+                }
             }
             catch (Exception e)
             {
