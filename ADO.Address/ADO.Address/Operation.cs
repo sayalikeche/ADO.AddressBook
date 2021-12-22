@@ -45,7 +45,7 @@ namespace ADO.Address
                 throw new Exception(e.Message);
             }
         }
-        //To Delete Person details    
+        
         public int DeletePersonDetails(int id)
         {
             try
@@ -74,5 +74,36 @@ namespace ADO.Address
                 throw new Exception(e.Message);
             }
         }
+
+        private bool UpdateAddressBookDetail(int id, string First_Name)
+        {
+            try
+            {
+                Connection();
+                SqlCommand com = new SqlCommand("UpdateAddressBook", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("@id", id);
+                com.Parameters.AddWithValue("@First_Name", First_Name);
+                con.Open();
+                int i = com.ExecuteNonQuery();
+                con.Close();
+                if (i >= 1)
+                {
+
+                    return true;
+
+                }
+                else
+                {
+
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
+    
