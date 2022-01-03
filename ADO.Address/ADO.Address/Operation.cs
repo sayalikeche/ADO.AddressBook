@@ -13,7 +13,7 @@ namespace ADO.Address
         
         private void Connection()
         {
-            string constr = "Server=(localdb)\\MSSQLLocalDB;Database=AddressBookServiceDB;Trusted_Connection=true";
+            string constr =@ "Server=(localdb)\\MSSQLLocalDB;Database=AddressBookServiceDB;Trusted_Connection=true";
             con = new SqlConnection(constr);
 
         }
